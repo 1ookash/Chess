@@ -1,0 +1,5 @@
+.idea/
+out/
+*.iml
+src/figures/Checker.java
+
