@@ -9,8 +9,8 @@ public class Rook extends Figure {
         super();
     }
 
-    public Rook(Color color) {
-        super(color);
+    public Rook(FigureColor figureColor) {
+        super(figureColor);
     }
 
     @Override

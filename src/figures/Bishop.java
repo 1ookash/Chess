@@ -9,8 +9,8 @@ public class Bishop extends Figure {
         super();
     }
 
-    public Bishop(Color color) {
-        super(color);
+    public Bishop(FigureColor figureColor) {
+        super(figureColor);
     }
 
     @Override

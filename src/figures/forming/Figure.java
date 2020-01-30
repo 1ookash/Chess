@@ -4,30 +4,30 @@ import chessBoard.forming.Cell;
 
 /* Задает основную сущность фигур */
 public abstract class Figure {
-    private final Color color;
+    private final FigureColor figureColor;
 
     public Figure() {
-        color = null;
+        figureColor = null;
     }
 
-    public Figure(Color color) {
-        this.color = color;
+    public Figure(FigureColor figureColor) {
+        this.figureColor = figureColor;
     }
 
-    public Color getColor() {
-        return color;
+    public FigureColor getFigureColor() {
+        return figureColor;
     }
 
     public String nameColor() {
-        if (color == Color.BLACK) {
-            return "Ч";
+        if (figureColor == FigureColor.BLACK) {
+            return "B";
         } else {
-            return "Б";
+            return "W";
         }
     }
 
     public int getColorOrdinal() {
-        return color.ordinal();
+        return figureColor.ordinal();
     }
 
     /* Проверяет возможность перемещения фигуры по ее правилам на новую чужую клетку
@@ -40,7 +40,7 @@ public abstract class Figure {
         if (newCell.getStatus()) {
             return ifCanMoveToAlienCell(oldCell, newCell);
         } else {
-            return ifCanMoveToAlienCell(oldCell, newCell) && newCell.getFig().getColor() != color;
+            return ifCanMoveToAlienCell(oldCell, newCell) && newCell.getFig().getFigureColor() != figureColor;
         }
     }
 }

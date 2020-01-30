@@ -9,8 +9,8 @@ public class Checker extends Figure {
         super();
     }
 
-    public Checker(Color color) {
-        super(color);
+    public Checker(FigureColor figureColor) {
+        super(figureColor);
     }
 
     @Override

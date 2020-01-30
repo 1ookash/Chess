@@ -9,8 +9,8 @@ public class King extends Figure {
         super();
     }
 
-    public King(Color color) {
-        super(color);
+    public King(FigureColor figureColor) {
+        super(figureColor);
     }
 
     @Override

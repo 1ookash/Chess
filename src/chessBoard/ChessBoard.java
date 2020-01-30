@@ -3,9 +3,11 @@ package chessBoard;
 import chessBoard.forming.Cell;
 import chessBoard.forming.Column;
 import figures.*;
-import figures.forming.Color;
+import figures.forming.FigureColor;
 import figures.forming.Figure;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,14 +20,14 @@ public class ChessBoard {
     /* Хранят съеденныее фигуры */
     private List<Figure> eatBlack = new LinkedList<>();
     private List<Figure> eatWhite = new LinkedList<>();
-    private final static Figure[] START_BLACK_EIGHTH_LINE = {new Rook(Color.BLACK),
-            new Knight(Color.BLACK), new Bishop(Color.BLACK), new King(Color.BLACK),
-            new Queen(Color.BLACK), new Bishop(Color.BLACK), new Knight(Color.BLACK),
-            new Rook(Color.BLACK)};
-    private final static Figure[] START_WHITE_FIRST_LINE = {new Rook(Color.WHITE),
-            new Knight(Color.WHITE), new Bishop(Color.WHITE), new King(Color.WHITE),
-            new Queen(Color.WHITE), new Bishop(Color.WHITE), new Knight(Color.WHITE),
-            new Rook(Color.WHITE)};
+    private final static Figure[] START_BLACK_EIGHTH_LINE = {new Rook(FigureColor.BLACK),
+            new Knight(FigureColor.BLACK), new Bishop(FigureColor.BLACK), new King(FigureColor.BLACK),
+            new Queen(FigureColor.BLACK), new Bishop(FigureColor.BLACK), new Knight(FigureColor.BLACK),
+            new Rook(FigureColor.BLACK)};
+    private final static Figure[] START_WHITE_FIRST_LINE = {new Rook(FigureColor.WHITE),
+            new Knight(FigureColor.WHITE), new Bishop(FigureColor.WHITE), new King(FigureColor.WHITE),
+            new Queen(FigureColor.WHITE), new Bishop(FigureColor.WHITE), new Knight(FigureColor.WHITE),
+            new Rook(FigureColor.WHITE)};
 
     public ChessBoard() {
         for (int x = 0; x < 8; x++) {
@@ -36,13 +38,26 @@ public class ChessBoard {
 
         for (int x = 0; x < 8; x++) {
             board[0][x].setFig(START_WHITE_FIRST_LINE[x]);
-            board[1][x].setFig(new Pawn(Color.WHITE));
-            board[6][x].setFig(new Pawn(Color.BLACK));
+            board[1][x].setFig(new Pawn(FigureColor.WHITE));
+            board[6][x].setFig(new Pawn(FigureColor.BLACK));
             board[7][x].setFig(START_BLACK_EIGHTH_LINE[x]);
         }
     }
 
-    /* Перемещает фигуру на новую клетку, освобождая старую */
+    public Cell[][] getBoard() {
+        return this.board;
+    }
+
+    public List<Figure> getEatBlack() {
+        return this.eatBlack;
+    }
+
+    public List<Figure> getEatWhite() {
+        return this.eatWhite;
+    }
+
+    /* Перемещает фигуру на новую клетку, освобождая старую
+     * Возвращает true, если перемещение удалось и false, если не удалось */
     public boolean moveFigure(Column oldX, int oldY, Column newX, int newY) {
         Cell oldCell = board[oldY - 1][oldX.ordinal()];
         Cell newCell = board[newY - 1][newX.ordinal()];
@@ -51,7 +66,7 @@ public class ChessBoard {
         if (!ifCanMove(oldCell.getFig(), oldCell, newCell)) return false;
 
         if (!newCell.getStatus()) {
-            if (newCell.getFig().getColor() == Color.BLACK) {
+            if (newCell.getFig().getFigureColor() == FigureColor.BLACK) {
                 eatBlack.add(newCell.getFig());
             } else {
                 eatWhite.add(newCell.getFig());
@@ -93,7 +108,7 @@ public class ChessBoard {
 
     /* Определяет есть ли фигуры на пути по диагонали между
      * начальной и конечной клеткой без учета их самих.
-     * Возвращает true ,если свободен, и false ,если занят */
+     * Возвращает true, если свободен, и false, если занят */
     private boolean ifFidNotOnWayDiagonal(Cell oldCell, Cell newCell) {
         boolean flag = true;
 

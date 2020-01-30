@@ -13,8 +13,8 @@ public class Pawn extends Figure {
         super();
     }
 
-    public Pawn(Color color) {
-        super(color);
+    public Pawn(FigureColor figureColor) {
+        super(figureColor);
         unUsed = true;
     }
 
@@ -37,13 +37,13 @@ public class Pawn extends Figure {
         if (oldCell.getX() != newCell.getX()) return false;
 
         if (unUsed) {
-            if (this.getColor() == Color.BLACK) {
+            if (this.getFigureColor() == FigureColor.BLACK) {
                 return -2 <= dy && dy <= 0;
             } else {
                 return 0 <= dy && dy <= 2;
             }
         } else {
-            if (this.getColor() == Color.BLACK) {
+            if (this.getFigureColor() == FigureColor.BLACK) {
                 return -1 <= dy && dy <= 0;
             } else {
                 return 0 <= dy && dy <= 1;
@@ -55,7 +55,7 @@ public class Pawn extends Figure {
     private boolean ifCanMoveAngle(Cell oldCell, Cell newCell, int dy) {
         if (newCell.getStatus()) return false;
 
-        if (this.getColor() == Color.WHITE) {
+        if (this.getFigureColor() == FigureColor.WHITE) {
             return 0 <= dy && dy <= 1;
         } else {
             return -1 <= dy && dy <= 0;

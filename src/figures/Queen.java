@@ -9,8 +9,8 @@ public class Queen extends Figure {
         super();
     }
 
-    public Queen(Color color) {
-        super(color);
+    public Queen(FigureColor figureColor) {
+        super(figureColor);
     }
 
     @Override
